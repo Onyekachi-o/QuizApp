@@ -68,9 +68,8 @@ body {
   }
   .btn {
     display: block;
-    
     width: 90px;
-    height: 35px;
+    height: 40px;
     color: #ffffff;
     background-color: #0B0E63;
     border: none;
@@ -84,7 +83,6 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-top: 20%;
-    align-items: center;
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
@@ -98,3 +96,21 @@ body {
     border-radius: 5px;    
   }
   
+  .quiz-completed {
+    text-align: center;
+    align-items: center;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20%;
+  }
+
+  .btn-2 {
+    width: 90px;
+    height: 40px;
+    color: #ffffff;
+    background-color: #0B0E63;
+    border: none;
+    border-radius: 5px;
+    font-weight: 700;
+  }

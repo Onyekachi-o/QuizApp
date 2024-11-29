@@ -60,7 +60,7 @@ function showQuestion(index) {
 
   const htmlSegment = `
     <div class="questiondisplay">
-      <p>${username}</p> <!-- Display username -->
+      <p>${username}</p> 
       <p>Question ${index + 1}/${questions.length}</p>
       <p id="question">${testQuestion.question}</p>
     </div>
@@ -90,7 +90,15 @@ function showQuestion(index) {
 
   questiondisplay.innerHTML = htmlSegment;
 
-
+ 
+  const savedAnswer = getSelectedAnswer(index);
+  if (savedAnswer) {
+    const selectedDiv = Array.from(document.querySelectorAll('.answeredquestion'))
+      .find(div => div.querySelector('.answer').innerText === savedAnswer);
+    if (selectedDiv) {
+      selectedDiv.classList.add('selected');
+    }
+  }
 
   const nextBtn = document.getElementById('next-btn');
   const prevBtn = document.getElementById('prev-btn');
@@ -104,18 +112,12 @@ function showQuestion(index) {
 }
 
 function handleAnsweredQuestion(question) {
-  
   const answeredquestion = document.querySelectorAll('.answeredquestion');
-
   const answer = question.querySelector('.answer');
   selectedOption = answer.innerHTML;
 
   answeredquestion.forEach((item) => item.classList.remove('selected'));
-
   question.classList.add('selected');
-
-
-
   saveAnswer(currentQuestionIndex, selectedOption); 
   saveData(selectedOption);
 
@@ -132,7 +134,7 @@ function handleNextQuestion() {
 
   const savedAnswer = getSelectedAnswer(currentQuestionIndex);
   console.log(savedAnswer,selectedOption,'savedAnswer')
-  if (!selectedOption) {
+  if (!savedAnswer) {
     alert("Please select an answer before proceeding.");
     return;
   }
@@ -142,10 +144,12 @@ function handleNextQuestion() {
     showQuestion(currentQuestionIndex);
   } else {
     questiondisplay.innerHTML = `
+    <div class="quiz-completed">
       <h2>Quiz Completed!</h2>
       <p>Thank you for participating, ${username}.</p>
       <p>Your total score is ${scores}/${questions.length}.</p>
-      <button class="btn" id="restart-btn">Restart Quiz</button>
+      <button class="btn-2" id="restart-btn">Restart Quiz</button>
+      </div>
     `;
 
     document.getElementById('restart-btn').addEventListener('click', restartQuiz);
